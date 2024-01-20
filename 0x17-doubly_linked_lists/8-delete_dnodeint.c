@@ -9,50 +9,34 @@
  * Return: Upon success - 1.
  *         Otherwise - -1.
  */
-
 int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 {
 	dlistint_t *traverse = *head;
-	int len = 0;
 
 	if (*head == NULL)
 		return (-1);
 
-	while (traverse)
+	for (; index != 0; index--)
 	{
-		len++;
+		if (traverse == NULL)
+			return (-1);
 		traverse = traverse->next;
 	}
-	if (index >= len)
-		return (-1);
 
-	if (index == 0)
+	if (traverse == *head)
 	{
-		*head = (*head)->next;
+		*head = traverse->next;
 		if (*head != NULL)
 			(*head)->prev = NULL;
+	}
 
-		free(traverse);
-		return (1);
-	}
-	if (index == len - 1)
-	{
-		traverse = *head;
-		while (traverse->next)
-			traverse = traverse->next;
-		traverse->prev->next = NULL;
-		free(traverse);
-		return (1);
-	}
 	else
 	{
-		traverse = *head;
-		while (index--)
-			traverse = traverse->next;
 		traverse->prev->next = traverse->next;
-		traverse->next->prev = traverse->prev;
-
-		free(traverse);
-		return (1);
+		if (traverse->next != NULL)
+			traverse->next->prev = traverse->prev;
 	}
+
+	free(traverse);
+	return (1);
 }
