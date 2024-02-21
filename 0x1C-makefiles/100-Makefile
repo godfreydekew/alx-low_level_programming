@@ -2,9 +2,8 @@
 '''Defines a function that returns the perimeter of an island.'''
 
 
-def island_perimeter(grid):
-    '''Returns the perimeter of an island.
-
+def island_perimeter(grid):	
+	'''
     Args:
         grid (list of list of int): Represents the island.
 
